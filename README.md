@@ -13,10 +13,10 @@ The application allows users to import products from the Fake Store API, update 
     -   Backend Setup (Laravel)
     -   Frontend Setup (Vue.js)
 -   Running the Application
+-   Usage
 -   Testing
     -   Backend Tests
     -   Frontend Tests
--   Usage
 -   Notes
 
 ## Project Overview
@@ -153,29 +153,6 @@ Before setting up the project, ensure you have the following installed:
     - Add some products to cart
     -   Use the navbar to navigate to the cart page.
 
-## Testing
-
-### Backend Tests
-
--   The backend uses PHPUnit for unit and feature tests, located in `tests/Feature` and `tests/Unit`.
-    
--   **Run Backend Tests**:
-    
-    ```bash
-    php artisan test
-    ```
-
-### Frontend Tests
-
--   The frontend uses Vitest for unit tests, located in `resources/js/tests`.
-    
--   **Run Frontend Tests**:
-    
-    ```bash
-    npm run test
-    ```
-  
-
 ## Usage
 
 1.  **Import Products**:
@@ -183,7 +160,7 @@ Before setting up the project, ensure you have the following installed:
     -   Run the Artisan command to fetch and sync products from the Fake Store API:
         
         ```bash
-        php artisan import:products
+        php artisan products:import
         ```
         
     -   This command ensures no duplicates and updates existing products if modified.
@@ -208,6 +185,31 @@ Before setting up the project, ensure you have the following installed:
     -   **Product Listing**: Browse products, view details (name, price, category, image), and click "Add to Cart".
     -   **Cart Page**: View cart contents, remove items, and adjust quantities. The cart persists across reloads using local storage with Pinia.
     -   **Cart Link**: Check the navbar for the cart link, which displays the number of items.
+
+
+## Testing
+
+### Backend Tests
+
+-   The backend uses PHPUnit for unit and feature tests, located in `tests/Feature` and `tests/Unit`.
+    
+-   **Run Backend Tests**:
+    
+    ```bash
+    php artisan test
+    ```
+
+### Frontend Tests
+
+-   The frontend uses Vitest for unit tests, located in `resources/js/tests`.
+    
+-   **Run Frontend Tests**:
+    
+    ```bash
+    npm run test
+    ```
+  
+
 
 ## Notes
 
