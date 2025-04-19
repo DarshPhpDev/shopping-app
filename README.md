@@ -271,29 +271,35 @@ Before setting up the project, ensure you have the following installed:
 shopping-app/
 ├── app/
 │   ├── Console/
-│   │   └── Commands/          # Artisan commands (products:import)
-│   │   └── Controllers/      # API controllers
-│   │   └── Requests/         # Form request validation
-│   │   └── Models/              # Eloquent models
-│   └── Services/            # Business logic implementation
+│   │   └── Commands/               # Artisan commands (products:import)
+│   └── Contracts/                  # Service Contracts
+│   └── Http/
+│   │   └── Controllers/            # API controllers
+│   │   └── Requests/               # Form request validation
+│   └── Models/                     # Eloquent models
+│   └── Services/                   # Business logic implementation
 ├── database/
-│   ├── factories/           # Model factories for testing
-│   └── migrations/          # Database migrations
+│   ├── factories/                  # Model factories for testing
+│   └── migrations/                 # Database migrations
 ├── resources/
 │   └── js/
-│       ├── components/      # Vue components
+│       └── api/                    # API integration
+│       ├── components/             # Vue components
 │       │   ├── ProductList.vue
 │       │   ├── CartPage.vue
 │       │   └── CartLink.vue
-│       ├── stores/          # Pinia stores
+│       └── router/                 # Router
+│       ├── stores/                 # Pinia stores
 │       │   ├── productStore.js
 │       │   └── cartStore.js
-│       └── api/            # API integration
+│       └── tests/                  # Unit Tests
+│       └── utils/                  # Helper Utilities
+
 ├── routes/
-│   └── api.php            # API route definitions
+│   └── api.php                     # API routes
 └── tests/
-    ├── Feature/          # Feature tests
-    └── Unit/            # Unit tests
+    ├── Feature/                    # Feature tests
+    └── Unit/                       # Unit tests
 ```
 
 ## Notes
