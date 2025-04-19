@@ -22,6 +22,7 @@ describe('CartPage', () => {
         store.updateQuantity = vi.fn()
     })
 
+    // Mount the CartPage component and define bootstrap components as global stubs to avoid warnings
     const mountComponent = () => {
         return mount(CartPage, {
             global: {
@@ -41,12 +42,14 @@ describe('CartPage', () => {
         })
     }
 
+    // test empty message when cart is empty
     it('shows empty message if cart is empty', () => {
         store.items = []
         const wrapper = mountComponent()
         expect(wrapper.text()).toContain('Your cart is empty')
     })
 
+    // test rendering correct cart items when cart has items.
     it('displays cart items and total when not empty', async () => {
         store.items = [
             { id: 1, title: 'Product 1', price: 10, image: 'test.jpg', quantity: 1 },
@@ -59,6 +62,7 @@ describe('CartPage', () => {
         expect(wrapper.text()).toContain('Total: $30')
     })
 
+    // test remove cart item functionality.
     it('removes an item when clicking remove', async () => {
         store.items = [
             { id: 1, title: 'Product 1', price: 10, image: 'test.jpg', quantity: 1 }
@@ -72,6 +76,7 @@ describe('CartPage', () => {
         expect(store.removeItem).toHaveBeenCalledWith(0)
     })
 
+    // test update item quantity functionality.
     it('updates quantity when changed', async () => {
         store.items = [
             { id: 1, title: 'Product 1', price: 10, image: 'test.jpg', quantity: 1 }

@@ -69,16 +69,10 @@ import { useRouter } from 'vue-router'
 const router = useRouter()
 const cartStore = useCartStore()
 
-const cartItems = computed(() => cartStore.items.map(item => ({
-    ...item,
-    quantity: item.quantity || 1
-})))
+// get cart items as computed property using items from the cartStore
+const cartItems = computed(() => cartStore.items);
 
-const cartTotal = computed(() => {
-    return cartStore.items.reduce((total, item) => {
-        return total + (item.price * (item.quantity || 1))
-    }, 0)
-})
+const cartTotal = computed(() => cartStore.total)
 
 const removeItem = (index) => {
     cartStore.removeItem(index)

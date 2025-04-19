@@ -8,6 +8,7 @@ import 'bootstrap-vue-3/dist/bootstrap-vue-3.css'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-icons/font/bootstrap-icons.css'
 
+// Create Vue App instance
 const app = createApp(App)
 
 app.use(createPinia())

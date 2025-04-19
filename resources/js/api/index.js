@@ -1,3 +1,8 @@
+/*
+* common api file to be used for api calls, simply axios instance
+* adding default headers and setting base url common fragment /api
+* adding token to the header if exists
+*/
 import axios from 'axios'
 import { useAuthStore } from '@/stores/authStore'
 import { handleApiError } from '@/utils/errorHandler'
