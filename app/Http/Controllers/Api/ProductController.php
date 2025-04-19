@@ -14,10 +14,22 @@ class ProductController extends Controller
 {
     protected $productService;
     
-    public function __construct(ProductServiceInterface $productService){
+    /**
+     * Create a new ProductController instance.
+     *
+     * @param ProductServiceInterface $productService
+     */
+    public function __construct(ProductServiceInterface $productService)
+    {
         $this->productService = $productService;
     }
 
+    /**
+     * Display a listing of products.
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
     public function index(Request $request): JsonResponse
     {
         $products = $this->productService->getAllProducts();
@@ -27,7 +39,14 @@ class ProductController extends Controller
             ->send(['products' => $products]);
     }
 
-    public function update(ProductUpdateRequest $request, $id): JsonResponse
+    /**
+     * Update the specified product.
+     *
+     * @param ProductUpdateRequest $request
+     * @param int $id
+     * @return JsonResponse
+     */
+    public function update(ProductUpdateRequest $request, int $id): JsonResponse
     {
         $product = $this->productService->updateProduct($id, $request->validated());
 

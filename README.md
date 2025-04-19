@@ -1,4 +1,3 @@
-
 # Shopping App - Laravel & Vue.js Demo
 
 This is a simple shopping application built with a Laravel 11 and a Vue.js 3
@@ -17,6 +16,8 @@ The application allows users to import products from the Fake Store API, update 
 -   Testing
     -   Backend Tests
     -   Frontend Tests
+-   API Documentation
+-   Project Structure
 -   Notes
 
 ## Project Overview
@@ -73,14 +74,12 @@ Before setting up the project, ensure you have the following installed:
     ```bash
     git clone https://github.com/DarshPhpDev/shopping-app.git
     cd shopping-app
-    
     ```
     
 2.  **Install Backend Dependencies**:
     
     ```bash
     composer install
-    
     ```
     
 3.  **Configure Environment**:
@@ -117,8 +116,6 @@ Before setting up the project, ensure you have the following installed:
         ```bash
         php artisan migrate
         ```
-        
-        
 
 ### Frontend Setup (Vue.js)
         
@@ -127,7 +124,6 @@ Before setting up the project, ensure you have the following installed:
     ```bash
     npm install
     ```
-        
 
 ## Running the Application
 
@@ -186,7 +182,6 @@ Before setting up the project, ensure you have the following installed:
     -   **Cart Page**: View cart contents, remove items, and adjust quantities. The cart persists across reloads using local storage with Pinia.
     -   **Cart Link**: Check the navbar for the cart link, which displays the number of items.
 
-
 ## Testing
 
 ### Backend Tests
@@ -208,8 +203,98 @@ Before setting up the project, ensure you have the following installed:
     ```bash
     npm run test
     ```
-  
 
+## API Documentation
+
+### Authentication Endpoints
+
+#### Register
+- **POST** `/api/register`
+- **Description**: Create a new user account
+- **Body**:
+```json
+{
+    "name": "string",
+    "email": "string",
+    "password": "string"
+}
+```
+- **Response**: Returns access token on success
+
+#### Login
+- **POST** `/api/login`
+- **Description**: Authenticate user and get access token
+- **Body**:
+```json
+{
+    "email": "string",
+    "password": "string"
+}
+```
+- **Response**: Returns access token on success
+
+#### Logout
+- **POST** `/api/logout`
+- **Description**: Invalidate current access token
+- **Headers**: `Authorization: Bearer {token}`
+- **Response**: Success message
+
+### Product Endpoints
+
+#### List Products
+- **GET** `/api/products`
+- **Description**: Get all products
+- **Access**: Public
+- **Response**: List of products
+
+
+#### Update Product
+- **PUT** `/api/products/{id}`
+- **Description**: Update product details
+- **Access**: Protected (requires authentication)
+- **Headers**: `Authorization: Bearer {token}`
+- **Body**:
+```json
+{
+    "title": "string (optional)",
+    "description": "string (optional)",
+    "price": "number (optional)",
+    "image": "string url (optional)"
+}
+```
+- **Response**: Updated product details
+
+
+## Project Structure
+
+```
+shopping-app/
+├── app/
+│   ├── Console/
+│   │   └── Commands/          # Artisan commands (products:import)
+│   │   └── Controllers/      # API controllers
+│   │   └── Requests/         # Form request validation
+│   │   └── Models/              # Eloquent models
+│   └── Services/            # Business logic implementation
+├── database/
+│   ├── factories/           # Model factories for testing
+│   └── migrations/          # Database migrations
+├── resources/
+│   └── js/
+│       ├── components/      # Vue components
+│       │   ├── ProductList.vue
+│       │   ├── CartPage.vue
+│       │   └── CartLink.vue
+│       ├── stores/          # Pinia stores
+│       │   ├── productStore.js
+│       │   └── cartStore.js
+│       └── api/            # API integration
+├── routes/
+│   └── api.php            # API route definitions
+└── tests/
+    ├── Feature/          # Feature tests
+    └── Unit/            # Unit tests
+```
 
 ## Notes
 

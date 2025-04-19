@@ -4,12 +4,14 @@ namespace App\Services;
 
 use App\Contracts\AuthServiceInterface;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
-use Auth;
 
 class AuthService implements AuthServiceInterface
 {
+    protected $model;
+    
     public function __construct(User $model)
     {
         $this->model = $model;
