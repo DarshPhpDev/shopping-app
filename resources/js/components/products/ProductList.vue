@@ -9,9 +9,21 @@
                 <div class="text-center mb-3 d-flex justify-content-center" v-if="productStore.isLoading">
                     <b-spinner variant="primary"></b-spinner>
                 </div>
-                <b-col md="4" v-for="product in productStore.products" :key="product.id" class="mb-4" data-test="product-item">
-                    <b-card :title="product.title" :img-src="product.image" img-top data-test="product-card">
-                        <b-card-text>{{ product.category }}</b-card-text>
+                <b-col md="3" v-for="product in productStore.products" :key="product.id" class="mb-4" data-test="product-item">
+                    <b-card 
+                        :title="product.title" 
+                        :img-src="product.image" 
+                        img-top 
+                        data-test="product-card"
+                        img-height="400"
+                        img-alt="Product image"
+                        class="product-card h-100"
+                    >
+                        <b-card-text>
+                            <div class="badge badge-info category-badge">
+                                {{ product.category }}
+                            </div>
+                        </b-card-text>
                         <b-card-text class="h4" data-test="product-price">${{ product.price }}</b-card-text>
                         <b-button 
                             @click="addToCart(product)" 
@@ -42,11 +54,25 @@ const isInCart = (product) => {
     return cartStore.items.some(item => item.id === product.id)
 }
 
-onMounted(async () => {
-    await productStore.fetchProducts()
-})
-
 const addToCart = (product) => {
     cartStore.addItem(product)
 }
+
+onMounted(async () => {
+    await productStore.fetchProducts()
+})
 </script>
+
+<style scoped>
+.product-card >>> .card-img-top {
+  height: 400px;
+  object-fit: contain;
+  object-position: center;
+}
+.category-badge {
+    font-size: 0.7rem;
+    padding: 0.5em 0.75em;
+    background-color: #17a2b8;
+    color: #fff;
+}
+</style>

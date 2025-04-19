@@ -14,8 +14,13 @@ export const useCartStore = defineStore('cart', {
         },
         // Calculates the total price of cart items using reduce function to accumulate the total price after each call.
         total: (state) => {
-            return state.items.reduce((sum, item) => sum + (item.price * (item.quantity || 1)), 0)
+            const total = state.items.reduce((sum, item) => {
+              return sum + (Number(item.price) * (item.quantity || 1))
+            }, 0)
+            // Round to 2 decimal places then convert back to number
+            return Number(total.toFixed(2))
         }
+
     },
 
     actions: {
