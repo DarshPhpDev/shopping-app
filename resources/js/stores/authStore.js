@@ -1,9 +1,11 @@
 import { defineStore } from 'pinia'
 import api from '@/api'
-
+import { showAlert } from '@/utils/alert.js'
 export const useAuthStore = defineStore('auth', {
 	state: () => ({
 		token: localStorage.getItem('token') || null,
+        isLoading: false,
+        error: null
 	}),
     getters: {
       isAuthenticated: (state) => !!state.token,
@@ -11,22 +13,42 @@ export const useAuthStore = defineStore('auth', {
     },
 	actions: {
 		async login(credentials) {
-			const { data } = await api.post('/login', credentials)
-			this.token = data.data.access_token
-			localStorage.setItem('token', data.data.access_token)
-			// axios.defaults.headers.common['Authorization'] = `Bearer ${data.data.access_token}`
+            this.isLoading = true
+            this.error = null
+            try {
+                const { data } = await api.post('/login', credentials)
+                this.token = data.data.access_token
+                localStorage.setItem('token', data.data.access_token)
+                showAlert(data.status.message, '', 'success')
+                return true;
+            } catch (error) {
+                throw error
+                return false;
+            } finally {
+                this.isLoading = false
+            }
 		},
 		async register(credentials) {
-			const { data } = await api.post('/register', credentials)
-			this.token = data.data.access_token
-			localStorage.setItem('token', data.data.access_token)
-			// axios.defaults.headers.common['Authorization'] = `Bearer ${data.data.access_token}`
+            this.isLoading = true
+            this.error = null
+            try {
+                const { data } = await api.post('/register', credentials)
+                this.token = data.data.access_token
+                localStorage.setItem('token', data.data.access_token)
+                showAlert(data.status.message, '', 'success')
+                return true
+            } catch (error) {
+                throw error
+                return false
+            } finally {
+                this.isLoading = false
+            }
 		},
-		logout() {
-            api.post('/logout')
+		async logout() {
+            const response = await api.post('/logout')
 			this.token = null
 			localStorage.removeItem('token')
-			delete axios.defaults.headers.common['Authorization']
+            showAlert(response.data.status.message, '', 'success')
 		}
 	},
 })

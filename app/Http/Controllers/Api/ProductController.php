@@ -5,10 +5,27 @@ namespace App\Http\Controllers\Api;
 use App\Contracts\ProductServiceInterface;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductUpdateRequest;
-use App\Models\Product;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
+
+/* 
+    Dev Notes:-
+        Laravel Api Resource could have been used to unify api response for each model
+        But since the project is very simple, I didn't use it to avoid unnecessary complications.
+        For api response format I'm using my own laravel package that I use in all api based projects.
+        Laravel API Response Formatter (https://github.com/DarshPhpDev/laravel-api-response-formatter)
+        Used like: return api_response()
+                        ->success()
+                        ->code(200)
+                        ->message('Successfully registered.');
+
+        Applying Single Responsibility Princible by using service layer to seprate business layer and keep the controllers clean handling request/response only.
+
+        Applying Dependency Inversion by depending on abstraction (Interfaces) instead of concrete service implementation
+        with the help of laravel dependency injection and service containers, I've registered concrete implementations 
+        of each interface in AppServiceProvider as $bindings array.
+
+*/
 
 class ProductController extends Controller
 {

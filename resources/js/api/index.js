@@ -1,8 +1,10 @@
 import axios from 'axios'
 import { useAuthStore } from '@/stores/authStore'
+import { handleApiError } from '@/utils/errorHandler'
 
+// Define baseURL and default headers for axios
 const api = axios.create({
-  baseURL: '/api', // Uses same domain as Laravel
+  baseURL: '/api',
   headers: {
     'Accept': 'application/json',
     'Content-Type': 'application/json'
@@ -11,7 +13,7 @@ const api = axios.create({
 
 // Add request interceptor for auth tokens
 api.interceptors.request.use(config => {
-    const authStore = useAuthStore()  // Get fresh store instance
+    const authStore = useAuthStore()
     if (authStore.getToken) {
       config.headers.Authorization = `Bearer ${authStore.getToken}`
     }
@@ -23,9 +25,10 @@ api.interceptors.response.use(
   response => response,
   error => {
     if (error.response?.status === 401) {
-      // Handle unauthorized
-      console.error('Authentication required')
+        // Handle unauthorized
+        localStorage.removeItem('token');
     }
+    handleApiError(error)
     return Promise.reject(error)
   }
 )

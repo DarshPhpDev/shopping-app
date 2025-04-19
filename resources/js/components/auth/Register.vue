@@ -14,7 +14,14 @@
           <b-form-input v-model="form.password" type="password" required></b-form-input>
         </b-form-group>
         
-        <b-button type="submit" variant="primary" block>Register</b-button>
+        <b-button 
+            type="submit" 
+            variant="primary"
+            :disabled="authStore.isLoading"
+        >
+            <b-spinner small v-if="authStore.isLoading" />
+            {{ authStore.isLoading ? 'Registering...' : 'Register' }}
+        </b-button>
       </b-form>
       <b-alert v-if="error" variant="danger" class="mt-3">{{ error }}</b-alert>
     </b-card>
@@ -35,14 +42,11 @@ const form = ref({
 })
 const error = ref(null)
 
-const store = useAuthStore()
+const authStore = useAuthStore()
 
 const register = async () => {
-  try {
-    store.register(form.value)
-    router.push('/')
-  } catch (err) {
-    error.value = err.response?.data?.message || 'Registration failed'
-  }
+    const registered = await authStore.register(form.value);
+    if(registered)
+        router.push('/')
 }
 </script>

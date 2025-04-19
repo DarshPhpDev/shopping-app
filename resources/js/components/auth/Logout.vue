@@ -1,3 +1,4 @@
+<template></template>
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
@@ -7,14 +8,10 @@ const router = useRouter()
 const error = ref(null)
 
 import { useAuthStore } from '@/stores/authStore'
-const store = useAuthStore()
+const authStore = useAuthStore()
 
 onMounted(async () => {
-    try {
-      store.logout()
-      router.push('/')
-    } catch (err) {
-      error.value = err.response?.data?.message || 'Logout failed'
-    }
+    authStore.logout()
+    router.push('/')
 });
 </script>

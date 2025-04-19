@@ -10,7 +10,10 @@ use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
-    // Register bindings to be resolved in Controller constructors.
+    /* 
+        Register bindings to be resolved in Controller constructors.
+        so when we pass AuthServiceInterface $authService it should be resolved as an object of AuthService
+    */
     public $bindings = [
         AuthServiceInterface::class => AuthService::class,
         ProductServiceInterface::class => ProductService::class,
