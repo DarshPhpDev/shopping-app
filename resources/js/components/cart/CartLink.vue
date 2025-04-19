@@ -15,10 +15,10 @@ const total = computed(() => cartStore.total.toFixed(2))
 
 <style scoped>
 .cart-badge {
-  font-size: 1rem;
-  padding: 0.5em 0.75em;
-  background-color: #007bff;
-  color: #fff;
-  border-radius: 50rem;
+    font-size: 1rem;
+    padding: 0.5em 0.75em;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 50rem;
 }
 </style>

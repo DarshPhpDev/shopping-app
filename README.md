@@ -5,20 +5,20 @@ The application allows users to import products from the Fake Store API, update 
 
 ## Table of Contents
 
--   Project Overview
--   Tech Stack
--   Prerequisites
--   Installation
-    -   Backend Setup (Laravel)
-    -   Frontend Setup (Vue.js)
--   Running the Application
--   Usage
--   Testing
-    -   Backend Tests
-    -   Frontend Tests
--   API Documentation
--   Project Structure
--   Notes
+-   [Project Overview](#project-overview)
+-   [Tech Stack](#tech-stack)
+-   [Prerequisites](#prerequisites)
+-   [Installation](#installation)
+    -   [Backend Setup (Laravel)](#backend-setup-laravel)
+    -   [Frontend Setup (Vue.js)](#frontend-setup-vue.js)
+-   [Running the Application](#running-the-application)
+-   [Usage](#usage)
+-   [Testing](#testing)
+    -   [Backend Tests](#backend-tests)
+    -   [Frontend Tests](#frontend-tests)
+-   [API Documentation](#api-documentation)
+-   [Project Structure](#project-structure)
+-   [Notes](#notes)
 
 ## Project Overview
 
