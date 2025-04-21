@@ -49,7 +49,8 @@ class ProductController extends Controller
      */
     public function index(Request $request): JsonResponse
     {
-        $products = $this->productService->getAllProducts();
+        $perPage = $request->get('per_page', 8);
+        $products = $this->productService->getAllProducts($perPage);
 
         return api_response()
             ->success()

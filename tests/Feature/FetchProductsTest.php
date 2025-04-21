@@ -18,27 +18,31 @@ class FetchProductsTest extends TestCase
         $this->artisan('products:import')->assertExitCode(0);
 
         $response = $this->getJson($this->endpoint);
-     
         $response->assertOk()
-                        ->assertJsonStructure([
-                            'status' => [
-                                'code',
-                                'message',
-                                'error',
-                                'validation_errors'
-                            ],
-                            'data' => [
-                                'products'  => [
+                    ->assertJsonStructure([
+                        'status' => [
+                            'code',
+                            'message',
+                            'error',
+                            'validation_errors'
+                        ],
+                        'data' => [
+                            'products'  => [
+                                'current_page',
+                                'data'  => [
                                     [
                                         'id',
                                         'title',
                                         'price',
-                                        'category',
-                                        'image'
+                                        'image',
+                                        'category'
                                     ]
-                                ]
+                                ],
+                                'per_page',
+                                'total'
                             ]
-                        ]);
+                        ]
+                    ]);
     }
 }
 

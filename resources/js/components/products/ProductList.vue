@@ -36,17 +36,25 @@
                     </b-card>
                 </b-col>
             </b-row>
+            <b-pagination
+                v-if="productStore.meta"
+                v-model="currentPage"
+                :total-rows="productStore.meta.total"
+                :per-page="productStore.meta.per_page"
+                align="center"
+            />
         </div>
     </b-container>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, watch, onMounted } from 'vue'
 import { useProductStore } from '@/stores/productStore'
 import { useCartStore } from '@/stores/cartStore'
 const cartStore = useCartStore()
 
 const productStore = useProductStore()
+const currentPage = ref(1)
 const loading = ref(true)
 const error = ref(null)
 
@@ -61,6 +69,14 @@ const addToCart = (product) => {
 onMounted(async () => {
     await productStore.fetchProducts()
 })
+
+// As a nic work around using watch on the b-pagination v-model (currentPage) 
+// since @input & @change in the b-pagination component is not working
+// probably due to compatibility issue with Vue 3
+watch(currentPage, (newPage) => {
+  productStore.fetchProducts(newPage)
+})
+
 </script>
 
 <style scoped>

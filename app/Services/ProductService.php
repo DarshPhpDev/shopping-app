@@ -4,27 +4,28 @@ namespace App\Services;
 
 use App\Contracts\ProductServiceInterface;
 use App\Models\Product;
-use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class ProductService implements ProductServiceInterface {
     
     /**
      * Retrieve all products with essential fields
      *
-     * @return Collection<Product>
+     * @return LengthAwarePaginator
      */
-    public function getAllProducts(): Collection
+    public function getAllProducts(int $perPage = 8): LengthAwarePaginator
     {
         return Product::join('categories', 'products.category_id', '=', 'categories.id')
-                        ->select([
-                            'products.id',
-                            'products.title',
-                            'products.price',
-                            'products.image',
-                            'categories.name as category',
-                        ])
-                        ->get();
+            ->select([
+                'products.id',
+                'products.title',
+                'products.price',
+                'products.image',
+                'categories.name as category',
+            ])
+            ->orderBy('products.id')
+            ->paginate($perPage);
     }
 
     /**

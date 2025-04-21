@@ -3,7 +3,7 @@
 namespace App\Contracts;
 
 use App\Models\Product;
-use Illuminate\Support\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 interface ProductServiceInterface
 {
@@ -12,7 +12,7 @@ interface ProductServiceInterface
      *
      * @return Collection<Product>
      */
-    public function getAllProducts(): Collection;
+    public function getAllProducts(int $perPage = 8): LengthAwarePaginator;
 
     /**
      * Update a product by its ID with validated data
