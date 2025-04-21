@@ -243,8 +243,9 @@ Before setting up the project, ensure you have the following installed:
 
 #### List Products
 - **GET** `/api/products`
-- **Description**: Get all products
+- **Description**: Get paginated products
 - **Access**: Public
+- **Query Params** `?page={page}`
 - **Response**: List of products
 
 
